@@ -8,6 +8,12 @@ from sql_queries import staging_events_table_drop, staging_songs_table_drop
 
 
 def drop_tables(cur, conn):
+    """Drop tables specified in the drop_table_queries variable from database
+
+    Args:
+        cur: the cursor variable
+        conn: the conection to the database
+    """
     for query in drop_table_queries:
         print("EXECUTING: {}".format(query))
         tic = time.perf_counter()
@@ -15,7 +21,15 @@ def drop_tables(cur, conn):
         conn.commit()
         toc = time.perf_counter()
         print(f"EXECUTION DONE IN {toc - tic:0.4f} seconds.")
+
 def execute_query(cur, conn,query):
+    """Executes a given query in the database
+
+    Args:
+        cur: the cursor variable
+        conn: the conection to the database
+        query (str): SQL query to be run on database
+    """
     print("EXECUTING: {}".format(query))
     tic = time.perf_counter()
     cur.execute(query)
@@ -24,6 +38,12 @@ def execute_query(cur, conn,query):
     print(f"EXECUTION DONE IN {toc - tic:0.4f} seconds.")
 
 def create_tables(cur, conn):
+    """Creates tables,  specified in the create_table_queries variable, in the database
+
+    Args:
+        cur: the cursor variable
+        conn: the conection to the database
+    """
     for query in create_table_queries:
         print("EXECUTING: {}".format(query))
         tic = time.perf_counter()

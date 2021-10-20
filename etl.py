@@ -5,8 +5,14 @@ import configparser
 from sql_queries import staging_events_copy,staging_songs_copy, insert_table_queries
 
 
-
 def load_staging_table(cur, conn, query):
+    """Executes a given COPY query to load a staging table in the dabase
+
+    Args:
+        cur: the cursor variable
+        conn: the conection to the database
+        query (str): COPY query to be run on database
+    """
     print("EXECUTING: {}".format(query))
     tic = time.perf_counter()
     cur.execute(query)
@@ -16,6 +22,12 @@ def load_staging_table(cur, conn, query):
 
 
 def insert_tables(cur, conn):
+    """Executes Insert queries in the database
+
+    Args:
+        cur: the cursor variable
+        conn: the conection to the database
+    """
     for query in insert_table_queries:
         print("EXECUTING: {}".format(query))
         tic = time.perf_counter()
